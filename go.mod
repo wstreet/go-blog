@@ -21,7 +21,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/swaggo/gin-swagger v1.5.1
 	github.com/ugorji/go/codec v1.2.7 // indirect
-	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
+	golang.org/x/crypto v0.0.0-20220214200702-86341886e292 // indirect
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
 	golang.org/x/text v0.3.7 // indirect
@@ -42,4 +42,12 @@ require (
 	github.com/swaggo/files v0.0.0-20220728132757-551d4a08d97a
 	github.com/swaggo/swag v1.8.1 // indirect
 	golang.org/x/tools v0.1.7 // indirect
+	gorm.io/driver/mysql v1.3.5
+)
+
+require (
+	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/lib/pq v1.10.6
+	gorm.io/datatypes v1.0.7
+	gorm.io/gorm v1.23.8
 )
