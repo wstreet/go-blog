@@ -24,5 +24,5 @@ import (
 func main() {
 	conf.Init()
 	r := routes.NewRouter()
-	r.Run(conf.HttpPort)
+	r.Run(conf.Conf.ServerConfig.Port)
 }

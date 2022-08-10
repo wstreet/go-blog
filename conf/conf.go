@@ -1,31 +1,46 @@
 package conf
 
 import (
+	"fmt"
 	"go-blog/model"
 	"strings"
+
+	"github.com/spf13/viper"
 )
 
-var (
-	AppMode    string
-	HttpPort   string
-	Db         string
-	DbPort     string
-	DbHost     string
-	DbName     string
-	DbUser     string
-	DbPassword string
-)
+var Conf = new(TotalConfig)
+
+type TotalConfig struct {
+	*MySQLConfig  `mapstructure:"mysql"`
+	*ServerConfig `mapstructure:"server"`
+}
+type ServerConfig struct {
+	Port string `mapstructure:"port"`
+}
+type MySQLConfig struct {
+	Host         string `mapstructure:"host"`
+	Username     string `mapstructure:"username"`
+	Password     string `mapstructure:"password"`
+	Dbname       string `mapstructure:"dbname"`
+	Suffix       string `mapstructure:"suffix"`
+	Port         int    `mapstructure:"port"`
+	MaxOpenConns int    `mapstructure:"max_open_conns"`
+	MaxIdleConns int    `mapstructure:"max_idle_conns"`
+}
 
 func Init() {
-	// TODO: read conf.init file
-	HttpPort = ":8080"
-	DbUser = "root"
-	DbPassword = "123456"
-	DbHost = "127.0.0.1"
-	DbPort = "3306"
-	DbName = "go-blog"
+	viper.SetConfigFile("./conf/conf.toml")
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Printf("viper.ReadInConfig failed, err:%v\n", err)
+		return
+	}
 
-	path := strings.Join([]string{DbUser, ":", DbPassword, "@tcp(", DbHost, ":", DbPort, ")/", DbName, "?charset=utf8&parseTime=true"}, "")
+	if err := viper.Unmarshal(Conf); err != nil {
+		fmt.Printf("viper.Unmarshal failed, err:%v\n", err)
+	}
+	fmt.Println(Conf.MySQLConfig)
+
+	path := strings.Join([]string{Conf.Username, ":", Conf.Password, "@tcp(", Conf.Host, ":", fmt.Sprintf("%d", Conf.MySQLConfig.Port), ")/", Conf.Dbname, "?", Conf.Suffix}, "")
 	model.Database(path)
 	// TODO: cache redis
 }
