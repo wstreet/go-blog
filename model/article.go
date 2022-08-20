@@ -13,5 +13,5 @@ type Article struct {
 	Tags       datatypes.JSON
 	Categories datatypes.JSON
 	User       User `gorm:"ForeignKey:UserId"`
-	UserId     int
+	UserId     uint
 }

@@ -1,7 +1,8 @@
 package api
 
 import (
-	// "go-blog/service"
+	"go-blog/service"
+	"go-blog/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,7 +24,15 @@ func ShowArticle(c *gin.Context) {
 }
 
 func CreateArticle(c *gin.Context) {
-
+	createService := service.CreateArticleService{}
+	chaim, _ := utils.ParseToken(c.GetHeader("Authorization"))
+	if err := c.ShouldBind(&createService); err == nil {
+		res := createService.Create(chaim.Id)
+		c.JSON(200, res)
+	} else {
+		c.JSON(400, ErrorResponse(err))
+		utils.LogrusObj.Info(err)
+	}
 }
 func UpdateArticle(c *gin.Context) {
 
