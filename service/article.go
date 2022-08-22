@@ -4,6 +4,7 @@ import (
 	"go-blog/model"
 	"go-blog/serializer"
 	"go-blog/utils"
+	"go-blog/utils/e"
 )
 
 //创建任务的服务
@@ -26,5 +27,20 @@ func (service *CreateArticleService) Create(id uint) serializer.Response {
 		Content: service.Content,
 		Status:  0,
 	}
-	code := utils.SUCCESS
+	code := e.SUCCESS
+	err := model.DB.Create(&user).Error
+	if err != nil {
+		utils.LogrusObj.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Code:  code,
+			Msg:   e.GetMsg(code),
+			Error: err.Error(),
+		}
+	}
+	return serializer.Response{
+		Code: code,
+		Data: serializer.BuildArticle(article),
+		Msg:  e.GetMsg(code),
+	}
 }

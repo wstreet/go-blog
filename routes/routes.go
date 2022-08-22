@@ -28,9 +28,9 @@ func NewRouter() *gin.Engine {
 		authed := v1.Group("/") //需要登陆保护
 		authed.Use(middleware.JWT())
 		{
-			v1.POST("articles", api.CreateArticle)
-			v1.PUT("articles/:id", api.UpdateArticle)
-			v1.DELETE("articles/:id", api.DeleteArticle)
+			authed.POST("articles", api.CreateArticle)
+			authed.PUT("articles/:id", api.UpdateArticle)
+			authed.DELETE("articles/:id", api.DeleteArticle)
 		}
 
 		v1.POST("admin/login", api.AdminLogin)
