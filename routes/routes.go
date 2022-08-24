@@ -33,7 +33,7 @@ func NewRouter() *gin.Engine {
 			authed.DELETE("articles/:id", api.DeleteArticle)
 		}
 
-		v1.POST("admin/login", api.AdminLogin)
+		v1.POST("admin/login", api.UserLogin)
 
 	}
 

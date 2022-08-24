@@ -1,6 +1,9 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -12,3 +15,17 @@ type User struct {
 }
 
 var PasswordDifficulty = 12
+
+func (user *User) Setpassword(password string) error {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), PasswordDifficulty)
+	if err != nil {
+		return err
+	}
+	user.Password = string(bytes)
+	return nil
+}
+
+func (user *User) CheckPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	return err == nil
+}
