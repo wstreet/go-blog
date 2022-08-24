@@ -28,7 +28,7 @@ func (service *CreateArticleService) Create(id uint) serializer.Response {
 		Status:  0,
 	}
 	code := e.SUCCESS
-	err := model.DB.Create(&user).Error
+	err := model.DB.Create(&article).Error
 	if err != nil {
 		utils.LogrusObj.Info(err)
 		code = e.ErrorDatabase
@@ -43,4 +43,23 @@ func (service *CreateArticleService) Create(id uint) serializer.Response {
 		Data: serializer.BuildArticle(article),
 		Msg:  e.GetMsg(code),
 	}
+}
+
+type ListService struct {
+	Limit int `json:"limit"`
+	Start int `json:"start"`
+}
+
+func (service *ListService) List() serializer.Response {
+	var articles []model.Article
+	var total int64
+	if service.Limit == 0 {
+		service.Limit = 10
+	}
+	model.DB.Model(model.Article{}).
+		Count(&total).
+		Limit(service.Limit).
+		Offset((service.Start - 1) * service.Limit).
+		Find(&articles)
+	return serializer.BuildListResponse(serializer.BuildArticles(articles), uint(total))
 }
