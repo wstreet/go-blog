@@ -1,0 +1,7 @@
+time="2022-08-28 21:07:21" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:11:27" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:12:23" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:13:44" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:16:15" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:16:32" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"
+time="2022-08-28 21:18:29" level=info msg="Error 1452: Cannot add or update a child row: a foreign key constraint fails (`go-blog`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`))"

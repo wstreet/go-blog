@@ -7,12 +7,23 @@ import (
 )
 
 func UserLogin(c *gin.Context) {
-	userLoginService := service.UserLoginService{}
-	if err := c.ShouldBind(&userLoginService); err != nil {
-		res := userLoginService.Login()
-		c.JSON(200, res)
-	} else {
+	userService := service.UserService{}
+	if err := c.ShouldBind(&userService); err != nil {
 		c.JSON(400, ErrorResponse(err))
 		utils.LogrusObj.Info(err)
+	} else {
+		res := userService.Login()
+		c.JSON(200, res)
+	}
+}
+
+func UserRegister(c *gin.Context) {
+	userService := service.UserService{}
+	if err := c.ShouldBind(&userService); err != nil {
+		c.JSON(400, ErrorResponse(err))
+		utils.LogrusObj.Info(err)
+	} else {
+		res := userService.Register()
+		c.JSON(200, res)
 	}
 }

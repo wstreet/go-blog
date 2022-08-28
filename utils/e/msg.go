@@ -11,6 +11,7 @@ var MsgFlags = map[int]string{
 	ErrorAuth:                  "Token错误",
 	ErrorNotCompare:            "不匹配",
 	ErrorDatabase:              "数据库操作出错,请重试",
+	ErrorExistUser:             "用户已经存在",
 }
 
 // GetMsg 获取状态码对应信息

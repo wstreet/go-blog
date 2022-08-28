@@ -8,5 +8,5 @@ func migration() {
 	if err != nil {
 		return
 	}
-	//DB.Model(&Task{}).AddForeignKey("uid","User(id)","CASCADE","CASCADE")
+	CreateDefaultRoles()
 }

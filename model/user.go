@@ -16,7 +16,7 @@ type User struct {
 
 var PasswordDifficulty = 12
 
-func (user *User) Setpassword(password string) error {
+func (user *User) SetPassword(password string) error {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), PasswordDifficulty)
 	if err != nil {
 		return err
