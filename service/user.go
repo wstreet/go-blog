@@ -49,7 +49,7 @@ func (service *UserService) Register() serializer.Response {
 	var user model.User
 	var admin model.Role
 	var count int64
-	model.DB.Model(&model.Role{}).Where("type=?", "admin").First(&admin)
+	model.DB.Model(&model.Role{}).Where("type=?", model.ADMIN).First(&admin)
 	model.DB.Model(&model.User{}).Where("name=?", service.UserName).First(&user).Count(&count)
 	if count == 1 {
 		code = e.ErrorExistUser

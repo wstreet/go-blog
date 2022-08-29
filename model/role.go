@@ -4,6 +4,11 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	ADMIN = "admin"
+	GUEST = "guest"
+)
+
 type Role struct {
 	gorm.Model
 	Type string
@@ -13,10 +18,10 @@ type Role struct {
 
 func CreateDefaultRoles() {
 	admin := Role{
-		Type: "admin",
+		Type: ADMIN,
 	}
 	guest := Role{
-		Type: "guest",
+		Type: GUEST,
 	}
 	roles := []Role{admin, guest}
 	DB.Create(&roles)

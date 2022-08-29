@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getLocal } from "../utils";
 
-let instance;
+let instance: { request: () => any; };
 
 function init() {
   const instance = axios.create({

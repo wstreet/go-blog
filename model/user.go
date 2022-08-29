@@ -29,3 +29,15 @@ func (user *User) CheckPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	return err == nil
 }
+
+// 内置管理员
+func CreateDefaultUsers() {
+	var role Role
+	DB.Model(&Role{}).Where("type=?", ADMIN).First(&role)
+	admin := User{
+		Name: "admin",
+		Role: role,
+	}
+	admin.SetPassword("123456")
+	DB.Create(&admin) // TODO: 判断是否执行过
+}

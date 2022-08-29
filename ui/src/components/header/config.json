@@ -1,0 +1,26 @@
+{
+  "login": "",
+  "site_name": "wstreet",
+  "menus": [
+    {
+      "title": "archive",
+      "path": "/view"
+    },
+    {
+      "title": "tags",
+      "path": "/tags"
+    },
+    {
+      "title": "categories",
+      "path": "/categories"
+    },
+    {
+      "title": "about",
+      "path": "/about"
+    },
+    {
+      "title": "project",
+      "path": "/project"
+    }
+  ]
+}

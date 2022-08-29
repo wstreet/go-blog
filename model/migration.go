@@ -9,4 +9,5 @@ func migration() {
 		return
 	}
 	CreateDefaultRoles()
+	CreateDefaultUsers()
 }
