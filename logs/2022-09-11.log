@@ -1,0 +1,6 @@
+time="2022-09-11 10:30:11" level=info msg="invalid character '\\n' in string literal"
+time="2022-09-11 10:30:46" level=info msg="invalid character '`' looking for beginning of value"
+time="2022-09-11 10:33:19" level=info msg="invalid character 'X' looking for beginning of value"
+time="2022-09-11 10:33:34" level=info msg="Key: 'CreateArticleService.Content' Error:Field validation for 'Content' failed on the 'max' tag"
+time="2022-09-11 10:33:57" level=info msg="Key: 'CreateArticleService.Content' Error:Field validation for 'Content' failed on the 'max' tag"
+time="2022-09-11 10:38:07" level=info msg="Key: 'CreateArticleService.Content' Error:Field validation for 'Content' failed on the 'max' tag"

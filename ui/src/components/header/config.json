@@ -1,10 +1,10 @@
 {
   "login": "",
-  "site_name": "wstreet",
+  "site_name": "street blog",
   "menus": [
     {
-      "title": "archive",
-      "path": "/view"
+      "title": "article",
+      "path": "/article"
     },
     {
       "title": "tags",

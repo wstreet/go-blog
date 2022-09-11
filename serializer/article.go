@@ -22,10 +22,11 @@ func BuildArticle(item model.Article) Article {
 	}
 }
 
-func BuildArticles(items []model.Article) (tasks []Article) {
+func BuildArticles(items []model.Article) (articles []Article) {
 	for _, item := range items {
-		task := BuildArticle(item)
-		tasks = append(tasks, task)
+		article := BuildArticle(item)
+		articles = append(articles, article)
 	}
-	return tasks
+
+	return articles
 }

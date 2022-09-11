@@ -1,21 +1,39 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosInstance } from "axios";
 import { getLocal } from "../utils";
 
-let instance: { request: () => any; };
+type RequestParams<P> = {
+  method?: "post" | "get";
+  url: string;
+  data?: P;
+  config?: AxiosRequestConfig;
+};
+
+type Response<T> = {
+  code: number;
+  data: T;
+  msg: string;
+  error: string;
+};
+
+let instance: AxiosInstance;
 
 function init() {
-  const instance = axios.create({
+  instance = axios.create({
     baseURL: "/api/v1/",
   });
   instance.defaults.headers.post["Content-Type"] = "application/json";
 
   // 添加请求拦截器
   instance.interceptors.request.use(
-    function (config) {
+    function (config: AxiosRequestConfig) {
       // 读取Authorization
       const authorization = getLocal("Authorization");
       if (!authorization) {
         // TODO: go to login page
+      }
+      if (!config.headers) {
+        config.headers = {};
       }
       config.headers["Authorization"] = authorization;
       return config;
@@ -42,10 +60,29 @@ function init() {
 }
 init();
 
-export default async function request<T>(
-  config: AxiosRequestConfig
-): Promise<T> {
-  const res = await instance.request();
+export const request = async <P, T>(
+  params: RequestParams<P>
+): Promise<T> => {
+  const {
+    method = "get",
+    url,
+    data: httpParams,
+    config = {} as AxiosRequestConfig,
+  } = params;
 
-  return Promise.resolve("" as T);
-}
+  const options: AxiosRequestConfig = {
+    method,
+    url,
+    ...config,
+  };
+
+  if (method === "get") {
+    options.params = httpParams;
+  } else {
+    options.data = httpParams;
+  }
+
+  const { data } = await instance.request<Response<T>>(options);
+  // TODO: handle error
+  return data.data;
+};

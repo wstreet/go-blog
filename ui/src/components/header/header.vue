@@ -1,27 +1,24 @@
+<script setup lang="ts">
+import { reactive } from "vue";
+import siteInfo from "./config.json";
+const menus = reactive(siteInfo.menus);
+</script>
+
 <template>
-  <header>
+  <header class="mb-12">
+    <a href="">
+      <div class="text-2xl font-bold">{{siteInfo.site_name}}</div>
+    </a>
     <nav>
-      <ul class="flex flex-row">
+      <ul class="flex justify-start">
         <li
           v-for="menu in menus"
           :key="menu.path"
-          :class="`basis-1/${menus.length} pr-6 pl-6`"
+          :class="`basis-1/${menus.length} pr-4 text-violet-500 hover:text-purple-700`"
         >
-         <RouterLink :to="menu.path"> {{ menu.title }}</RouterLink>
+          <RouterLink :to="menu.path"> {{ menu.title }}</RouterLink>
         </li>
       </ul>
     </nav>
   </header>
 </template>
-
-<script lang="ts">
-import { defineComponent } from "vue";
-import siteInfo from "./config.json";
-
-export default defineComponent({
-  name: "WHeader",
-  setup(props, { emit }) {
-    return { menus: siteInfo.menus };
-  },
-});
-</script>

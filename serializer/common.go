@@ -10,7 +10,7 @@ type Response struct {
 
 //DataList 带有总数的Data结构
 type DataList struct {
-	Item  interface{} `json:"item"`
+	Items interface{} `json:"items"`
 	Total uint        `json:"total"`
 }
 
@@ -19,7 +19,7 @@ func BuildListResponse(items interface{}, total uint) Response {
 	return Response{
 		Code: 200,
 		Data: DataList{
-			Item:  items,
+			Items: items,
 			Total: total,
 		},
 		Msg: "ok",
