@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
-
-interface Article {
-  id: string;
-  title: string;
-  content: string;
-  // tags: string[];
-  // categories: string[];
-}
+import type Article from "@/doamin/article";
+import { formatDate, formatTime } from "@/utils";
 
 interface Props {
   article: Article;
@@ -19,13 +13,27 @@ const props = defineProps<Props>();
 
 <template>
   <div class="mb-1.5">
-    <div class="text-violet-500">
+    <div class="text-slate-500">
+      <span class="pr-4" v-if="!props.showContent">{{
+        formatDate(props.article.updated_at)
+      }}</span>
       <a
         :href="`/article/${props.article.id}`"
-        :class="`${props.showContent ? 'text-2xl mb-6' : ''}`"
+        :class="`${props.showContent ? 'text-2xl mb-6' : ''} underline`"
       >
         {{ props.article.title }}
       </a>
+    </div>
+    <div v-if="props.showContent">
+      <span class="pr-2 text-violet-400">{{ props.article.user_name }}</span>
+      <span class="pr-1">发表于</span
+      ><span class="text-violet-400 pr-2">{{
+        formatTime(props.article.created_at)
+      }}</span>
+      <span class="pr-1">更新于</span
+      ><span class="text-violet-400 pr-2">{{
+        formatTime(props.article.updated_at)
+      }}</span>
     </div>
     <div class="mt-6" v-if="props.showContent">{{ props.article.content }}</div>
   </div>
