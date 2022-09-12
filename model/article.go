@@ -15,3 +15,7 @@ type Article struct {
 	User       User `gorm:"ForeignKey:UserId"`
 	UserId     uint
 }
+
+func (a *Article) AddView() { // TODO:
+
+}

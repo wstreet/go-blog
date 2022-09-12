@@ -21,10 +21,18 @@ func Articles(c *gin.Context) {
 	c.JSON(200, res)
 }
 
+/**
+ * 文章详情
+ */
 func ShowArticle(c *gin.Context) {
-
+	showService := service.ShowService{}
+	res := showService.Show(c.Param("id"))
+	c.JSON(200, res)
 }
 
+/**
+ * 创建文章
+ */
 func CreateArticle(c *gin.Context) {
 	createService := service.CreateArticleService{}
 	chaim, _ := utils.ParseToken(c.GetHeader("Authorization"))

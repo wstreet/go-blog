@@ -63,3 +63,27 @@ func (service *ListService) List() serializer.Response {
 		Find(&articles)
 	return serializer.BuildListResponse(serializer.BuildArticles(articles), uint(total))
 }
+
+type ShowService struct {
+}
+
+func (service *ShowService) Show(id string) serializer.Response {
+	var article model.Article
+	code := e.SUCCESS
+	err := model.DB.First(&article).Error
+	if err != nil {
+		utils.LogrusObj.Info(err)
+		code = e.ErrorDatabase
+		return serializer.Response{
+			Code:  code,
+			Msg:   e.GetMsg(code),
+			Error: err.Error(),
+		}
+	}
+	article.AddView()
+	return serializer.Response{
+		Code: code,
+		Msg:  e.GetMsg(code),
+		Data: serializer.BuildArticle(article),
+	}
+}
