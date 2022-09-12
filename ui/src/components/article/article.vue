@@ -20,10 +20,13 @@ const props = defineProps<Props>();
 <template>
   <div class="mb-1.5">
     <div class="text-violet-500">
-      <a :href="`/article/${props.article.id}`">
+      <a
+        :href="`/article/${props.article.id}`"
+        :class="`${props.showContent ? 'text-2xl mb-6' : ''}`"
+      >
         {{ props.article.title }}
       </a>
     </div>
-    <div v-if="props.showContent">{{ props.article.content }}</div>
+    <div class="mt-6" v-if="props.showContent">{{ props.article.content }}</div>
   </div>
 </template>

@@ -18,6 +18,7 @@ const router = createRouter({
       path: "/article/:id",
       name: "articleDetail",
       component: () => import("../views/guest/ArticleDetail.vue"),
+      props: () => {}
     },
     {
       path: "/about",

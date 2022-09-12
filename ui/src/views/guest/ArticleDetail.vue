@@ -1,29 +1,28 @@
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
 import WArticle from "@/components/article/article.vue";
+import articleService from "@/services/article";
+import type Article from "@/doamin/article";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  components: {
-    WArticle,
-  },
-  props: {
-    id: { type: String, required: true },
-  },
-  setup(props) {
-    return {
-      article: {
-        id: "article3",
-        title: "title3",
-        content: "content3",
-      },
-    };
-  },
-  fetchData() {
-    console.log("fetchData");
-  },
+const article = ref<Article>({});
+const loading = ref<boolean>();
+const route = useRoute();
+const id = route.params.id as string;
+
+onMounted(() => {
+  queryArticle();
 });
+
+const queryArticle = async () => {
+  loading.value = true;
+  const res = await articleService.getDetail(id);
+  article.value = res;
+  loading.value = false;
+};
 </script>
 
 <template>
-   <WArticle :article="article" :show-content="true"></WArticle>
+  <div v-if="loading">loading</div>
+  <WArticle v-else :article="article" :show-content="true"></WArticle>
 </template>

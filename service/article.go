@@ -70,7 +70,7 @@ type ShowService struct {
 func (service *ShowService) Show(id string) serializer.Response {
 	var article model.Article
 	code := e.SUCCESS
-	err := model.DB.First(&article).Error
+	err := model.DB.First(&article, id).Error
 	if err != nil {
 		utils.LogrusObj.Info(err)
 		code = e.ErrorDatabase
