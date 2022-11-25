@@ -2,11 +2,14 @@
 import { onMounted, ref } from "vue";
 import WArticle from "@/components/article/article.vue";
 import articleService from "@/services/article";
-import type Article from "@/doamin/article";
+import type { Article } from "@/domain/article";
+import { getUrlParam } from "@/utils";
+
+const tag = getUrlParam("tag");
 
 const articles = ref<Article[]>([]);
 onMounted(async () => {
-  const res = await articleService.getList();
+  const res = await articleService.getList({ tag });
   articles.value = res.items || [];
 });
 </script>

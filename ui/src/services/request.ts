@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { AxiosRequestConfig, AxiosInstance } from "axios";
-import { getLocal } from "../utils";
+import { getLocal } from "@/utils";
 
 type RequestParams<P> = {
   method?: "post" | "get";

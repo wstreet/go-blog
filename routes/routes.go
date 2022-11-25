@@ -25,6 +25,7 @@ func NewRouter() *gin.Engine {
 		})
 		v1.GET("articles", api.Articles)
 		v1.GET("articles/:id", api.ShowArticle)
+		v1.GET("tags", api.Tags)
 		v1.POST("admin/login", api.UserLogin)
 		v1.POST("admin/register", api.UserRegister)
 		authed := v1.Group("/") //需要登陆保护

@@ -5,10 +5,11 @@ import (
 	"go-blog/serializer"
 	"go-blog/utils"
 	"go-blog/utils/e"
+
 	"gorm.io/datatypes"
 )
 
-//创建任务的服务
+// 创建任务的服务
 type CreateArticleService struct {
 	Title      string         `form:"title" json:"title" binding:"required,min=2,max=100"`
 	Content    string         `form:"content" json:"content"`
@@ -49,8 +50,9 @@ func (service *CreateArticleService) Create(id uint) serializer.Response {
 }
 
 type ListService struct {
-	Limit int `json:"limit"`
-	Start int `json:"start"`
+	Limit int    `json:"limit"`
+	Start int    `json:"start"`
+	Tag   string `json: "tag"`
 }
 
 func (service *ListService) List() serializer.Response {
@@ -59,7 +61,9 @@ func (service *ListService) List() serializer.Response {
 	if service.Limit == 0 {
 		service.Limit = 10
 	}
+
 	model.DB.Model(model.Article{}).
+		Where("tags LIKE ?", "%"+service.Tag+"%"). // TODO: 查询待修改
 		Count(&total).
 		Limit(service.Limit).
 		Offset((service.Start - 1) * service.Limit).

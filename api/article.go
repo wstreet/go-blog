@@ -16,7 +16,9 @@ import (
 // @Failure 500  {object} serializer.ResponseUser "{"status":500,"data":{},"Msg":{},"Error":"error"}"
 // @Router /user/register [post]
 func Articles(c *gin.Context) {
-	listService := service.ListService{}
+	listService := service.ListService{
+		Tag: c.Query("tag"),
+	}
 	res := listService.List()
 	c.JSON(200, res)
 }

@@ -2,7 +2,7 @@
   "name": "vue-project",
   "version": "0.0.0",
   "scripts": {
-    "start": "ENV_NAME=test vite",
+    "start": "vite",
     "dev": "npm run dev",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
