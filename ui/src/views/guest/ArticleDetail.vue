@@ -2,10 +2,10 @@
 import { ref, onMounted } from "vue";
 import WArticle from "@/components/article/article.vue";
 import articleService from "@/services/article";
-import type Article from "@/doamin/article";
+import type { Article } from "@/domain/article";
 import { useRoute } from "vue-router";
 
-const article = ref<Article>({});
+const article = ref<Article>({} as Article);
 const loading = ref<boolean>();
 const route = useRoute();
 const id = route.params.id as string;

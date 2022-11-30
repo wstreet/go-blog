@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
-import type Article from "@/doamin/article";
+import type { Article } from "@/domain/article";
 import { formatDate, formatTime } from "@/utils";
 
 interface Props {
