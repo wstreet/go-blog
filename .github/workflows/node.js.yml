@@ -29,3 +29,4 @@ jobs:
     - run: cd ui
     - run: npm ci
     - run: npm run build
+    - run: npm run build
